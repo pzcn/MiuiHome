@@ -13,7 +13,7 @@ android {
         minSdk = 29
         targetSdk = 32
         versionCode = 4200
-        versionName = "4.2.0" + (Common.getGitHeadRefsSuffix(rootProject))
+        versionName = "4.2.0" + (getGitHeadRefsSuffix(rootProject))
     }
     buildTypes {
         release {
