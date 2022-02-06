@@ -13,7 +13,7 @@ android {
         minSdk = 29
         targetSdk = 32
         versionCode = 4200
-        versionName = "4.2.0" + (Common.getGitHeadRefsSuffix(rootProject))
+        versionName = "4.2.0"
     }
     buildTypes {
         release {
@@ -47,26 +47,6 @@ android {
         }
     }
     androidResources.additionalParameters("--allow-reserved-package-id", "--package-id", "0x64")
-    ext.getGitHeadRefsSuffix = {
-        try {
-            // .git/HEAD描述当前目录所指向的分支信息，内容示例："ref: refs/heads/master\n"
-            def headFile = new File(rootDir, '.git/HEAD')
-            if (headFile.exists()) {
-                String[] strings = headFile.getText('UTF-8').split(" ")
-                if (strings.size() > 1) {
-                    String refFilePath = '.git/' + strings[1]
-                    // 根据HEAD读取当前指向的hash值，路径示例为：".git/refs/heads/master"
-                    def refFile = new File(rootDir, refFilePath.replace("\n", ""))
-                    // 索引文件内容为hash值+"\n"，
-                    // 示例："90312cd9157587d11779ed7be776e3220050b308\n"
-                    return "(${refFile.getText('UTF-8').substring(0, 7)})"
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace()
-        }
-        return ""
-    }
 }
 
 dependencies {
